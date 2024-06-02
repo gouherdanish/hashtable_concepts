@@ -25,43 +25,42 @@ class HashTable:
         self._data = [None]*self._capacity
 
     def __str__(self) -> str:
-        res = ','.join([str(ll) for i, ll in enumerate(self._data) if ll])
+        res = ','.join([str(node) for i, node in enumerate(self._data) if node])
         return '{' + res + '}'
-    
-    def _appendleft(self,sll,node):
-        node.next = sll
-        sll = node
-        return sll
 
     def put(self,key,val):
+        """
+        Time - O(1) on average, O(n) in worst case
+        """
         idx = key % self._capacity
-        new_node = Node(key,val)
-        sll = self._data[idx]
-        print(sll)
-        if sll is None:
-            sll = new_node
+        if self._data[idx] is None:
+            self._data[idx] = Node(key,val)
         else:
-            sll = self._appendleft(sll,new_node)
-        print('After Append')
-        print(sll)
-        self._data[idx] = sll
-
-    def _search(self,sll,key):
-        while sll:
-            if sll.key == key: return sll.val
-            sll = sll.next
-        return None
+            curr = self._data[idx]
+            while curr.next:
+                if curr.key == key:
+                    curr.val = val
+                    return
+                curr = curr.next
+            curr.next = Node(key,val)
 
     def get(self,key):
+        """
+        Time - O(1) on average, O(n) in worst case
+        """
         idx = key % self._capacity
-        sll = self._data[idx]
-        if sll is None: return None
-        return self._search(sll,key)
-
+        curr = self._data[idx]
+        while curr:
+            if curr.key == key: 
+                return curr.val
+            curr = curr.next
+        return None
 
 if __name__=='__main__':
     ht = HashTable()
     ht.put(1,4)
+    print(ht)
+    ht.put(1,5)
     print(ht)
     ht.put(11,5)
     print(ht)
