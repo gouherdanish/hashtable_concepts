@@ -37,10 +37,12 @@ class HashTable:
             self._data[idx] = Node(key,val)
         else:
             curr = self._data[idx]
-            while curr.next:
+            while curr:                 # Need curr here to avoid the edge case when we update a key 1 from 10 to 100 e.g. {1:10} to {1:10,1:100} (multiple entries for same key)
                 if curr.key == key:
-                    curr.val = val
+                    curr.val = val      # Update value if key exists
                     return
+                if curr.next is None:
+                    break               # Need this to avoid NoneType error
                 curr = curr.next
             curr.next = Node(key,val)
 
@@ -66,6 +68,6 @@ if __name__=='__main__':
     print(ht)
     ht.put(2,3)
     print(ht)
-    print(ht.get(11))
+    print(ht.get(1))
     # sll = Node(1,11,Node(2,12))
     # print(sll)
