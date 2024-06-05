@@ -1,8 +1,8 @@
 class HashTable:
     """
-    Approach - Using two 1D arrays to track keys and values
+    Approach - Using 2D array as the underlying data structure
     - Works on Linear Probing (a type of Open Addressing)
-    - Resizes the table when load factor exceeds a limit
+    - Resizes the table when load factor exceeds a threshold
     
     """
     def __init__(self,capacity=2,load_factor_threshold=0.8) -> None:

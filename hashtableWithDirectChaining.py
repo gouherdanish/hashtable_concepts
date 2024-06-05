@@ -27,6 +27,13 @@ class HashTable:
     def __str__(self) -> str:
         res = ','.join([str(node) for i, node in enumerate(self._data) if node])
         return '{' + res + '}'
+    
+    def items(self):
+        for bucket in self._data:
+            curr = bucket
+            while curr:
+                yield (curr.key,curr.val)
+                curr = curr.next
 
     def put(self,key,val):
         """
@@ -64,10 +71,11 @@ if __name__=='__main__':
     print(ht)
     ht.put(1,5)
     print(ht)
-    ht.put(11,5)
-    print(ht)
     ht.put(2,3)
     print(ht)
+    ht.put(11,5)
+    print(ht)
     print(ht.get(1))
+    for item in ht.items(): print(item)
     # sll = Node(1,11,Node(2,12))
     # print(sll)
