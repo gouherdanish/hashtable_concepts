@@ -13,6 +13,10 @@ class HashSet:
     def __len__(self):
         return sum(len(bucket) for bucket in self._buckets)
 
+    def __contains__(self,key):
+        idx = self._hash(key)
+        return key in self._buckets[idx]
+
     def _hash(self,key):
         return hash(key) % self._capacity
 
@@ -23,10 +27,6 @@ class HashSet:
     
     def contains(self,key):
         return self.__contains__(key)
-
-    def __contains__(self,key):
-        idx = self._hash(key)
-        return key in self._buckets[idx]
     
     def pop(self,key):
         idx = self._hash(key)
