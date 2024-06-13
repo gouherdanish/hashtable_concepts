@@ -7,6 +7,9 @@ class DllNode:
 
     def __str__(self) -> str:
         return f'{self.key}:{self.val}'
+    
+    def __repr__(self):
+        return str(self)
 
 class DLL:
     """
@@ -26,6 +29,9 @@ class DLL:
 
     def __str__(self) -> str:
         return '<->'.join([str(node) for node in self]) if self.head else ''
+    
+    def __repr__(self):
+        return str(self)
     
     def insert(self,key,val):
         # If key exists, then update
@@ -72,13 +78,19 @@ class OrderedDict:
         return hash(key) % self._capacity
     
     def put(self,key,val):
+        """
+        O(n) - since we need to traverse _global_list everytime
+        """
         idx = self._hash(key)
-        self._table[idx].insert(key,val)
-        self._global_list.insert(key,val)
+        self._table[idx].insert(key,val)    # O(1) avg
+        self._global_list.insert(key,val)   # O(n)
     
     def get(self,key):
+        """
+        O(1) average
+        """
         idx = self._hash(key)
-        return self._table[idx].search(key)
+        return self._table[idx].search(key) # O(1)
     
     def items(self):
         return self._global_list.items()
@@ -91,15 +103,23 @@ if __name__=='__main__':
     dll.insert(1,10)
     dll.insert(2,20)
     print(dll)
+
     ht = OrderedDict()
-    ht.put(1,4)
+    ht.put(1,10)
     print(ht)
-    ht.put(1,5)
+    print(ht._table)
+    ht.put(1,11)
     print(ht)
-    ht.put(2,3)
+    print(ht._table)
+    ht.put(2,20)
     print(ht)
-    ht.put(11,5)
+    print(ht._table)
+    ht.put(3,30)
     print(ht)
+    print(ht._table)
+    ht.put(11,110)
+    print(ht)
+    print(ht._table)
     print(ht.get(1))
     for item in ht.items(): 
         print(item)

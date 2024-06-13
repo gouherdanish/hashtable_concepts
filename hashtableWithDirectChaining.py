@@ -6,6 +6,9 @@ class Node:
 
     def __str__(self) -> str:
         return '->'.join([f'{node.key}:{node.val}' for node in self])
+    
+    def __repr__(self):
+        return str(self)
             
     def __iter__(self):
         curr = self
@@ -67,14 +70,21 @@ class HashTable:
 
 if __name__=='__main__':
     ht = HashTable()
-    ht.put(1,4)
+    ht.put(1,10)
     print(ht)
-    ht.put(1,5)
+    print(ht._data)
+    ht.put(1,11)
     print(ht)
-    ht.put(2,3)
+    print(ht._data)
+    ht.put(2,20)
     print(ht)
-    ht.put(11,5)
+    print(ht._data)
+    ht.put(3,30)
     print(ht)
+    print(ht._data)
+    ht.put(11,110)
+    print(ht)
+    print(ht._data)
     print(ht.get(1))
     for item in ht.items(): print(item)
     # sll = Node(1,11,Node(2,12))

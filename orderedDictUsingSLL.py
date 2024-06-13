@@ -6,6 +6,9 @@ class SLLNode:
 
     def __str__(self) -> str:
         return f'{self.key}:{self.val}'
+
+    def __repr__(self):
+        return str(self)
     
 class SLL:
     def __init__(self) -> None:
@@ -20,6 +23,9 @@ class SLL:
 
     def __str__(self) -> str:
         return '->'.join([str(node) for node in self])
+    
+    def __repr__(self):
+        return str(self)
     
     def __bool__(self):
         return self.head.next is not None
@@ -104,15 +110,30 @@ if __name__=='__main__':
         print(item)
 
     ht = OrderedDict()
-    ht.put(1,4)
+    ht.put(1,10)
     print(ht)
-    ht.put(1,5)
+    print(ht._table)
+    ht.put(1,11)
     print(ht)
-    ht.put(2,3)
+    print(ht._table)
+    ht.put(2,20)
     print(ht)
-    ht.put(11,5)
+    print(ht._table)
+    ht.put(3,30)
     print(ht)
+    print(ht._table)
+    ht.put(11,110)
+    print(ht)
+    print(ht._table)
     print(ht.get(1))
-
     for item in ht.items(): 
         print(item)
+
+    ht = OrderedDict()
+    ht.put('apple',100)
+    ht.put('banana',30)
+    print(ht)
+    ht.put('banana',50)
+    print(ht)
+    ht.pop('banana')
+    print(ht)
